@@ -1,0 +1,27 @@
+r = 5;
+x = -r:0.01:r;
+y = -r:0.01:r;
+[xMesh, yMesh] = meshgrid(x,y);
+S = (xMesh.^2 + yMesh.^2 < r^2);
+N = numel(S(:));
+disp(N)
+X = zeros(N,1);
+Y = zeros(N,1);
+Z = zeros(N,1);
+
+p = 1;
+
+for i  = 1:numel(x)
+    for j = 1:numel(y)
+      if (x(i)^2 + y(j)^2) < r^2
+          x0 = x(i);
+          y0 = y(j);
+          z0 = sqrt(r^2 - x0^2 - y0^2);
+          theta = asin(z0/r);
+          I0 = 1;
+          k = 100;
+          l = 0.01;
+          [Er, ETheta, HPhi] = hertzianDipoleElectromag(I0, r, theta, k, l)
+      end
+    end
+end
