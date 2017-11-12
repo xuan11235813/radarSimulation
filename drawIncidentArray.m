@@ -1,16 +1,16 @@
 % generate the current
-lineNum = 30;
-lineUnitLength = 0.01;
-I0 = 0.5;
+lineNum = 400;
+lineUnitLength = 0.001;
+I0 = 0.05;
 k = 200;
-incidentAngle = pi/6;
+incidentAngle = pi/9;
 %currentArray= constantCurrent( lineNum, lineUnitLength, I0, k, incidentAngle);
 currentArray= calculateCurrent( lineNum, lineUnitLength, I0, k, incidentAngle);
 
 
 r = 2;
-thetaStep = 0.01;
-phiStep = 0.01;
+thetaStep = 0.005;
+phiStep = 0.005;
 thetaArray = -pi/2:thetaStep:pi/2;
 phiArray  = -pi:phiStep:pi;
 [thetaMesh ,phiMesh] = meshgrid(thetaArray, phiArray);
