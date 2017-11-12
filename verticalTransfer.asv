@@ -1,0 +1,5 @@
+function [x, y ,z] = verticalTransfer(x,y,z)
+
+
+
+t = z/sqrt(1-z^2)

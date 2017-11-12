@@ -1,1 +1,42 @@
-% generate 
+% generate the current
+lineNum = 20;
+lineUnitLength = 0.01;
+I0 = 0.5;
+k = 200;
+incidentAngle = pi/6;
+
+currentArray= calculateCurrent( lineNum, lineUnitLength, I0, k, incidentAngle);
+
+r = 2;
+x = -r:0.03:r;
+y = -r:0.03:r;
+[xMesh, yMesh] = meshgrid(x,y);
+S = (xMesh.^2 + yMesh.^2 < r^2);
+N = numel(S(:));
+X = zeros(N,1);
+Y = zeros(N,1);
+Z = zeros(N,1);
+
+p = 1;
+
+for i  = 1:numel(x)
+    for j = 1:numel(y)
+      if (x(i)^2 + y(j)^2) < r^2
+          x0 = x(i);
+          y0 = y(j);
+          z0 = sqrt(r^2 - x0^2 - y0^2);          
+          [Er, ETheta] = calculateMultiDrection( lineNum, lineUnitLength, [1,1,1],currentArray, k);
+          r1 = s
+          z1 = r1 * cos(theta);
+          x1 = r1 * sin(theta) * cos(phi);
+          y1 = r1 * sin(theta) * sin(phi);
+          X(p) = x1;
+          Y(p) = y1;
+          Z(p) = z1;
+          p = p + 1;
+      end
+    end
+end
+
+plot3(X,Y,Z)
+axis equal
