@@ -2,13 +2,14 @@
 lineNum = 1000;
 lineUnitLength = 0.0002;
 B0 = 0.01;
-k = 200;
+k = 500;
 incidentAngle = pi/9;
 length = lineNum * lineUnitLength;
-sparkLength = 0.004;
-dutyCycle = 0.2;
+sparkLength = 0.003;
+dutyCycle = 0.3;
+
 disk = generateDisk( ...
-    'randomSemiConductSpark', ...
+    'randomConductSpark', ...
     lineUnitLength, ...
     length, ...
     sparkLength, ...
@@ -16,6 +17,7 @@ disk = generateDisk( ...
 figure;
 plot(disk);
 
+figure;
 for i = 0:pi/200:pi/3
     currentArray = calculateCurrentWithDisk(...
         disk,...
@@ -25,7 +27,7 @@ for i = 0:pi/200:pi/3
         k);
 
 
-    r = 1.5;
+    r = 20;
     thetaStep = 0.005;
     phi = 0;
     thetaArray = -pi/2:thetaStep:pi/2;
@@ -45,7 +47,7 @@ for i = 0:pi/200:pi/3
     end
     
     polarplot(thetaArray,rhoArray)
-    pause(0.2);
+    pause(0.1);
 end
 
 % currentArray = calculateCurrentWithDisk(...
