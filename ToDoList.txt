@@ -1,0 +1,11 @@
+Dear Gan,
+yesterday, I have spoken to Prof. Ender and, concerning your thesis, we have agreed on the following programme of work:
+? extend the simulation tool (MATLAB) for metallic + non-metallic (dielectric) regions of reflection 
+? extend the simulation tool (MATLAB) for 2D reflector structures with hexagonal patch shape 
+? verification of the MATLAB-tool with full wave simulations (e.g. CST Studio) 
+? calculation of scattered fields for a given disc geometry (defined by University of Siegen) 
+? possibly (if results can be provided by FHR): experimental verification of the MATLAB-tool 
+? possibly (if you have a good idea and some time left): apply some imaging algorithm to the simulated data and simulate results 
+If you also agree with the PoW, you can register your thesis with "Pr¨¹fungsamt". If you have additional questions, we can discuss again next Monday.
+Regards
+Peter Knott
