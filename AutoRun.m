@@ -10,13 +10,13 @@ angleStep = 1;
 
 % number of line element. the totla length of simulated object is lineNum *
 % lineUnitLength
-lineNum = 1000;
+lineNum = 200;
 
 % line element length (meter)
-lineUnitLength = 0.0002;
+lineUnitLength = 0.001;
 
 % incident electromagnatic intensity, magnatic part (Tesla)
-B0 = 0.01;
+B0 = 1e-9;
 
 % the size of spark (meter)
 sparkLength = 0.002;

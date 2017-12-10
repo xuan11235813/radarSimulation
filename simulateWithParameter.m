@@ -42,7 +42,7 @@ for i = startAngle:angleStep:endAngle
     rhoArray = zeros(1,numel(thetaArray));
 
 
-    for j = 1:numel(thetaArray)
+    parfor j = 1:numel(thetaArray)
         theta = thetaArray(j);
         phi = 0;
         x0 = r * cos(theta)*cos(phi);
