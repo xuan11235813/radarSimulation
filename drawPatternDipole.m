@@ -1,8 +1,8 @@
-r = 2;
+r = 5;
 thetaStep = 0.01;
 phiStep = 0.01;
 thetaArray = -pi/2:thetaStep:pi/2;
-phiArray  = -pi:phiStep:pi;
+phiArray  = -pi:phiStep:0;
 [thetaMesh ,phiMesh] = meshgrid(thetaArray, phiArray);
 
 [height, width] = size(thetaMesh);

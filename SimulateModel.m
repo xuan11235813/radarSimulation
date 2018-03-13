@@ -38,6 +38,7 @@ classdef SimulateModel <handle
                     end
                 end
             end
+            
             disp('Done !')
         end
         
@@ -60,10 +61,11 @@ classdef SimulateModel <handle
             r = obj.parameter.r;
             lineUnitLength = obj.parameter.lineUnitLength;
             currentMatrix = obj.current;
+            mesh(abs(currentMatrix));
             pos = obj.position;
             
-            thetaStep = 0.01;
-            phiStep = 0.01;
+            thetaStep = 0.05;
+            phiStep = 0.05;
             thetaArray = 0:thetaStep:pi/2;
             phiArray  = -pi:phiStep:pi;
             [thetaMesh ,phiMesh] = meshgrid(thetaArray, phiArray);

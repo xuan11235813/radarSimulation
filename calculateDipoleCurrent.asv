@@ -1,0 +1,4 @@
+function current = calculateDipoleCurrent( length, k, I0, num )
+
+unitLength = length/num;
+current = zeros()
