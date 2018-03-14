@@ -1,5 +1,5 @@
 % generate the current
-lineNum = 300;
+lineNum = 225;
 lineUnitLength = 0.0001;
 B0 = 0.01;
 k = 418.879;
@@ -18,32 +18,31 @@ figure;
 plot(disk);
 
 figure;
-for i = 0:pi/200:pi/100
-    currentArray = calculateCurrentWithDisk(...
-        disk,...
-        B0,...
-        i,...
-        lineUnitLength,...
-        k);
-
+for i = 0:pi/200:pi/200
+    
+%     currentArray = calculateCurrentWithDisk(...
+%         disk,...
+%         B0,...
+%         i,...
+%         lineUnitLength,...
+%         k);
+    currentArray = calculateDipoleCurrent( lineNum, lineUnitLength, 1, k);
 
     r = 1;
     thetaStep = 0.005;
-    phi = 0;
-    thetaArray = -pi/2:thetaStep:pi/2;
+    thetaArray = 0:thetaStep:2 * pi;
 
     rhoArray = zeros(1,numel(thetaArray));
 
 
     for j = 1:numel(thetaArray)
         theta = thetaArray(j);
-        phi = 0;
-        x0 = r * cos(theta)*cos(phi);
-        y0 = r * cos(theta)*sin(phi);
-        z0 = r * sin(theta);
+        x0 = 0;
+        y0 = r * sin(theta);
+        z0 = r * cos(theta);
         [Er, ETheta] = calculateMultiDrection( lineNum, lineUnitLength, [x0,y0,z0],currentArray, k);
-        r1 = norm(Er + ETheta);
-        rhoArray(j) = log(r1);
+        r1 = norm(real(Er) + real(ETheta));
+        rhoArray(j) = r1;
     end
     
     polarplot(thetaArray,rhoArray)

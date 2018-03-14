@@ -1,3 +1,3 @@
-sim = SimulateModel('conductor.bmp');
+sim = SimulateModel('example4.png');
 
 sim.startSimulation();

@@ -8,10 +8,10 @@ directionVector = position;
 directionVector(:,:,1) = targetPointCood(1) - directionVector(:,:,1);
 directionVector(:,:,2) = targetPointCood(2) - directionVector(:,:,2);
 directionVector(:,:,3) = targetPointCood(3) - directionVector(:,:,3);
-z = directionVector(:,3);
+%z = directionVector(:,3);
 r = sqrt(sum(directionVector.^2, 3));
 directionVector = directionVector./r;
-theta = acos(z./r);
+theta = acos(directionVector(:,:,1));
 [ErMatrix, EThetaMatrix, ~] = hertzianDipoleElectromagArray(...
     currentMatrix, r, theta, k, lineUnitLength);
 Er = sum(sum(ErMatrix.*directionVector));

@@ -65,8 +65,8 @@ classdef SimulateModel <handle
             mesh(abs(currentMatrix));
             pos = obj.position;
             
-            thetaStep = pi/(2* 35);
-            phiStep = pi/(2* 35);
+            thetaStep = 0.05;
+            phiStep = 0.05;
             thetaArray = 0:thetaStep:pi/2;
             phiArray  = -pi:phiStep:pi;
             [thetaMesh ,phiMesh] = meshgrid(thetaArray, phiArray);
@@ -91,7 +91,7 @@ classdef SimulateModel <handle
                     r1 = abs(Er + ETheta).^2;
                     % calculate power
                     r1 = sum(r1(:));
-                    rhoMesh(i,j) = r1;
+                    rhoMesh(i,j) = 0.5 /(sin( - theta));
                 end
             end
             [X, Y, Z] = sph2cart(phiMesh, thetaMesh, rhoMesh);
