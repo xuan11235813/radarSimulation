@@ -42,17 +42,17 @@ for i = startAngle:angleStep:endAngle
     rhoArray = zeros(1,numel(thetaArray));
 
 
-    parfor j = 1:numel(thetaArray)
+    for j = 1:numel(thetaArray)
         theta = thetaArray(j);
         phi = 0;
         x0 = r * cos(theta)*cos(phi);
         y0 = r * cos(theta)*sin(phi);
         z0 = r * sin(theta);
         [Er, ETheta] = calculateMultiDrection( lineNum, lineUnitLength, [x0,y0,z0],currentArray, k);
-        r1 = norm(Er + ETheta);
+        r1 = norm(abs(Er) + abs(ETheta));
         rhoArray(j) = r1;
     end
     
     polarplot(thetaArray,rhoArray)
-    pause(0.1);
+    pause(0.2);
 end

@@ -1,7 +1,0 @@
-function current = calculateDipoleCurrent( N, unitL, I0, k)
-
-current = zeros(N,1);
-length = N * unitL;
-for i = 1:N
-    coord = 
-end

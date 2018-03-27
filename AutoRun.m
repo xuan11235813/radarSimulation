@@ -39,13 +39,13 @@ dutyCycle = 0.1;
 %               part is made by semiconductor.
 
 % You can specify the semi parameter in 'generateDisk.m'
-diskMode = 'regularConductSpark';
+diskMode = 'randomConductSpark';
 
 % Distance (meter)
-r = 2;
+r = 250;
 
 % wave property
-k = 500;
+k = 1256.637;
 
 
 simulateWithParameter(...

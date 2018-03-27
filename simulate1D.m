@@ -1,32 +1,35 @@
-% generate the current
-lineNum = 225;
-lineUnitLength = 0.0001;
+gamma = 20;
+lineNum = 480*gamma;
+lineUnitLength = 0.00025/gamma;
 B0 = 0.01;
 k = 418.879;
-incidentAngle = pi/9;
-length = lineNum * lineUnitLength;
-sparkLength = 0.003;
-dutyCycle = 1;
 
-disk = generateDisk( ...
+length = lineNum * lineUnitLength;
+
+sparkLength = 0.002;
+dutyCycle = 0.2;
+disk_unregular = generateDisk( ...
     'conductor', ...
     lineUnitLength, ...
     length, ...
     sparkLength, ...
     dutyCycle);
-figure;
-plot(disk);
+subplot(5,1,5);
+plot(disk_unregular);
 
+
+
+disk = disk_unregular;
 figure;
-for i = 0:pi/200:pi/200
+for i = 0:pi/2:pi/200
     
-%     currentArray = calculateCurrentWithDisk(...
-%         disk,...
-%         B0,...
-%         i,...
-%         lineUnitLength,...
-%         k);
-    currentArray = calculateDipoleCurrent( lineNum, lineUnitLength, 1, k);
+    currentArray = calculateCurrentWithDisk(...
+        disk,...
+        B0,...
+        i,...
+        lineUnitLength,...
+        k);
+%     currentArray = calculateDipoleCurrent( lineNum, lineUnitLength, 1, k);
 
     r = 1;
     thetaStep = 0.005;

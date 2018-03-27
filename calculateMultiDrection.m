@@ -14,6 +14,6 @@ r = sqrt(sum(directionVector.^2, 2));
 directionVector = directionVector./r;
 theta = acos(z./r);
 [ErArray, EThetaArray, ~] = hertzianDipoleElectromagArray(currentArray, r, theta, k, lineUnitLength);
-Er = real(sum(ErArray.* directionVector,1));
-ETheta = real(sum(EThetaArray .* directionVector,1));
+Er = sum(ErArray.* directionVector,1);
+ETheta = sum(EThetaArray .* directionVector,1);
 

@@ -7,7 +7,9 @@ classdef SimulateModel <handle
         current
         position
         isConduct
-        
+        rMesh
+        pMesh
+        tMesh
         % number
         
     end
@@ -94,6 +96,10 @@ classdef SimulateModel <handle
                     rhoMesh(i,j) = r1;
                 end
             end
+            obj.pMesh = phiMesh;
+            obj.rMesh = rhoMesh;
+            obj.tMesh = thetaMesh;
+            
             [X, Y, Z] = sph2cart(phiMesh, thetaMesh, rhoMesh);
             figure;
             mesh(X,Y,Z);
