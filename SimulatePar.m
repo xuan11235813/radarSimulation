@@ -30,17 +30,17 @@ classdef SimulatePar < handle
         function obj = SimulatePar()
             
             obj.incidentAngle = 0;
-            obj.exampleWidth = 0.006048;
-            %obj.exampleWidth = 0.1791;
-            obj.lineUnitLength = 0.0002;
-            obj.lineUnitWidth = obj.lineUnitLength/20;
-            if obj.lineUnitWidth <= 2e-6
-                obj.lineUnitWidth = 2e-6;
+            %obj.exampleWidth = 0.006048;
+            obj.exampleWidth = 0.1791;
+            obj.lineUnitLength = 0.00025;
+            obj.lineUnitWidth = obj.lineUnitLength/12;
+            if obj.lineUnitWidth <= 2e-7
+                obj.lineUnitWidth = 2e-7;
             end
             if obj.lineUnitLength/obj.lineUnitWidth <= 8
                 disp('inaccurate simulation')
             end
-            obj.r = 1;
+            obj.r = 20;
             obj.k = 1256.637;
             obj.B0 = 1e-9;
             obj.E0 = obj.B0/sqrt( 8.854 * 10^-12 * 4 * pi* 10 ^ -7);

@@ -11,6 +11,8 @@ classdef SimulateModel <handle
         pMesh
         tMesh
         % number
+        % string 
+        fileName
         
     end
     methods
@@ -18,6 +20,7 @@ classdef SimulateModel <handle
         function obj = SimulateModel( exampleName )
             disp('initialize simulation model')
             obj.parameter = SimulatePar();
+            obj.fileName = exampleName;
             obj.diskMode = DiskModel(exampleName, obj.parameter.exampleWidth);
             widthLength = obj.diskMode.edgeWidthSize;
             heightLength = obj.diskMode.edgeHeightSize;
@@ -27,6 +30,7 @@ classdef SimulateModel <handle
             obj.isConduct = zeros(currentHeight, currentWidth);
             obj.position =zeros(currentHeight, currentWidth, 3);
             disp('calculate surface current')
+            
             for i =  1:currentHeight
                 for j = 1:currentWidth
                     obj.position(i,j,1) = obj.parameter.lineUnitLength * ...
@@ -64,7 +68,6 @@ classdef SimulateModel <handle
             r = obj.parameter.r;
             lineUnitLength = obj.parameter.lineUnitLength;
             currentMatrix = obj.current;
-            mesh(abs(currentMatrix));
             pos = obj.position;
             
             thetaStep = pi/(2* 35);
@@ -99,11 +102,12 @@ classdef SimulateModel <handle
             obj.pMesh = phiMesh;
             obj.rMesh = rhoMesh;
             obj.tMesh = thetaMesh;
-            
+
             [X, Y, Z] = sph2cart(phiMesh, thetaMesh, rhoMesh);
             figure;
             mesh(X,Y,Z);
             axis equal
+            save newResult phiMesh thetaMesh rhoMesh currentMatrix
         end
         
     end

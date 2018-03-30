@@ -12,7 +12,7 @@ directionVector(:,:,3) = targetPointCood(3) - directionVector(:,:,3);
 r = sqrt(sum(directionVector.^2, 3));
 directionVector = directionVector./r;
 theta = acos(directionVector(:,:,1));
-[ErMatrix, EThetaMatrix, ~] = hertzianDipoleElectromagArray(...
+[ErMatrix, EThetaMatrix, ~] = herzianDipoleElectromagArrayFarfield(...
     currentMatrix, r, theta, k, lineUnitLength);
 Er = sum(sum(ErMatrix.*directionVector));
 ETheta = sum(sum(EThetaMatrix.* directionVector));

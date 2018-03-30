@@ -1,8 +1,8 @@
-gamma = 20;
+gamma = 5;
 lineNum = 480*gamma;
 lineUnitLength = 0.00025/gamma;
 B0 = 0.01;
-k = 418.879;
+k = 418.879 * 6;
 
 length = lineNum * lineUnitLength;
 
