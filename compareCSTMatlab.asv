@@ -1,0 +1,79 @@
+function compareCSTMatlab( CSTFileName, MatlabMat )
+
+delimiterIn = ' ';
+headerlinesIn = 2;
+A = importdata(CSTFileName,delimiterIn,headerlinesIn);
+
+
+dataCST = A.data;
+originalTheta = dataCST(:,1);
+originalPhi = dataCST(:,2);
+originalRCS = dataCST(:,3);
+
+thetaCST = unique(originalTheta);
+phiCST = unique(originalPhi);
+rhoMeshCST = reshape(originalRCS, [numel(thetaCST), numel(phiCST)]);
+thetaMeshCST = (reshape(originalTheta, [numel(thetaCST), numel(phiCST)])/180*pi - pi/2);
+phiMeshCST = (reshape(originalPhi, [numel(thetaCST), numel(phiCST)])/180*pi - pi);
+
+
+[X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, rhoMeshCST);
+
+X_ = reshape(X(Z>0), [sum(sum(Z>0))/numel(phiCST), numel(phiCST)]);
+Y_ = reshape(Y(Z>0), [sum(sum(Z>0))/numel(phiCST), numel(phiCST)]);
+Z_ = reshape(Z(Z>0), [sum(sum(Z>0))/numel(phiCST), numel(phiCST)]);
+
+[phiMeshCST, thetaMeshCST, rhoMeshCST] = cart2sph(X_, Y_, Z_);
+phiMeshCST = phiMeshCST';
+thetaMeshCST = thetaMeshCST';
+rhoMeshCST = rhoMeshCST';
+
+
+rhoMeshCST = rhoMeshCST/max(rhoMeshCST(:));
+
+dataMatlab = load(MatlabMat);
+rhoMeshMatlab = dataMatlab.rhoMesh;
+thetaMeshMatlab = dataMatlab.thetaMesh;
+phiMeshMatlab = dataMatlab.phiMesh;
+
+rhoMeshMatlab = rhoMeshMatlab/max(rhoMeshMatlab(:));
+
+figure;
+mesh(thetaMeshCST)
+
+figure;
+mesh(thetaMeshMatlab)
+
+
+
+% try to find the indices in matlab model
+[height, width] = size(rhoMeshCST);
+for i = 1:height
+    for j = 1:width
+        currentPhiCST = phiMeshCST(i,j);
+        currentThetaCST = thetaMeshCST(i,j);
+        currentRhoCST = rhoMeshCST(i,j);
+        [normalPhi, alphaPhi, previousPhi, ~] = findIndex( phiMeshMatlab, currentPhiCST );
+        [normalTheta, alphaTheta, previousTheta, ~] = findIndex(thetaMeshMatlab, currentThetaCST);
+        if normalPhi == 0 && normalTheta == 0 
+            rho00 = rhoMeshCST(previousPhi, previousTheta);
+            rho01 = rhoMeshCST(previousPhi +1, previousTheta);
+            rho10 = rhoMeshCST()
+        end
+        
+    end
+end
+
+
+% [X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, rhoMeshCST);
+% 
+% figure;
+% mesh(X,Y,Z);
+% axis equal
+% 
+% 
+% [X, Y, Z] = sph2cart(phiMeshMatlab, thetaMeshMatlab, rhoMeshMatlab);
+% 
+% figure;
+% mesh(X,Y,Z);
+% axis equal

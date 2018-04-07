@@ -1,20 +1,19 @@
-gamma = 5;
+gamma = 20;
 lineNum = 480*gamma;
 lineUnitLength = 0.00025/gamma;
 B0 = 0.01;
-k = 418.879 * 6;
+k = 418.879 * 12;
 
 length = lineNum * lineUnitLength;
 
 sparkLength = 0.002;
 dutyCycle = 0.2;
 disk_unregular = generateDisk( ...
-    'conductor', ...
+    'randomConductSpark', ...
     lineUnitLength, ...
     length, ...
     sparkLength, ...
     dutyCycle);
-subplot(5,1,5);
 plot(disk_unregular);
 
 

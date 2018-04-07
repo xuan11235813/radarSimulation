@@ -70,8 +70,8 @@ classdef SimulateModel <handle
             currentMatrix = obj.current;
             pos = obj.position;
             
-            thetaStep = pi/(2* 35);
-            phiStep = pi/(2* 35);
+            thetaStep = obj.parameter.thetaStep;
+            phiStep = obj.parameter.thetaStep;
             thetaArray = 0:thetaStep:pi/2;
             phiArray  = -pi:phiStep:pi;
             [thetaMesh ,phiMesh] = meshgrid(thetaArray, phiArray);
