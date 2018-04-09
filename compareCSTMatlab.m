@@ -28,13 +28,18 @@ phiMeshCST = phiMeshCST';
 thetaMeshCST = thetaMeshCST';
 rhoMeshCST = rhoMeshCST';
 
-
 rhoMeshCST = rhoMeshCST/max(rhoMeshCST(:));
 
 dataMatlab = load(MatlabMat);
 rhoMeshMatlab = dataMatlab.rhoMesh;
 thetaMeshMatlab = dataMatlab.thetaMesh;
 phiMeshMatlab = dataMatlab.phiMesh;
+
+[X, Y, Z] = sph2cart(phiMeshMatlab, thetaMeshMatlab, rhoMeshMatlab);
+
+figure;
+mesh(X,Y,Z);
+axis equal
 
 rhoMeshMatlab = rhoMeshMatlab/max(rhoMeshMatlab(:));
 
@@ -67,6 +72,18 @@ for i = 1:height
 end
 
 disp(sum(errorMat(:))/numel(errorMat));
+[X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, rhoMeshCST);
+figure;
+mesh(X,Y,Z);
+axis equal
+
+[X, Y, Z] = sph2cart(phiMeshMatlab, thetaMeshMatlab, rhoMeshMatlab);
+
+figure;
+mesh(X,Y,Z);
+axis equal
+
+
 
 [X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, errorMat);
 
@@ -75,20 +92,32 @@ mesh(X,Y,Z);
 axis equal
 
 [X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, rhoMeshMatlabStar);
-
 figure;
 mesh(X,Y,Z);
 axis equal
 
+[X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, rhoMeshMatlabStar);
+index = X>0;
+[up, down, left, right] = findRange(index);
+
+X = X(up:down, left:right);
+Y = Y(up:down, left:right);
+Z = Z(up:down, left:right);
+
+figure;
+mesh(X,Y,Z, ones(size(X))/3);
+axis equal
+hold;
 [X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, rhoMeshCST);
+index = X>0;
+[up, down, left, right] = findRange(index);
 
-figure;
-mesh(X,Y,Z);
+X = X(up:down, left:right);
+Y = Y(up:down, left:right);
+Z = Z(up:down, left:right);
+mesh(X,Y,Z, ones(size(X))/2);
 axis equal
 
+
+
 % 
-% [X, Y, Z] = sph2cart(phiMeshMatlab, thetaMeshMatlab, rhoMeshMatlab);
-% 
-% figure;
-% mesh(X,Y,Z);
-% axis equal
