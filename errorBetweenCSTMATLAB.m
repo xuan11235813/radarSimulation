@@ -1,4 +1,5 @@
-function compareCSTMatlab( CSTFileName, MatlabMat )
+function error = errorBetweenCSTMATLAB( CSTFileName, MatlabMat )
+
 
 delimiterIn = ' ';
 headerlinesIn = 2;
@@ -35,12 +36,7 @@ rhoMeshMatlab = dataMatlab.rhoMesh;
 thetaMeshMatlab = dataMatlab.thetaMesh;
 phiMeshMatlab = dataMatlab.phiMesh;
 
-[X, Y, Z] = sph2cart(phiMeshMatlab, thetaMeshMatlab, rhoMeshMatlab);
 
-figure;
-mesh(X,Y,Z);
-axis equal
-title('original matlab output')
 rhoMeshMatlab = rhoMeshMatlab/max(rhoMeshMatlab(:));
 
 
@@ -73,56 +69,4 @@ end
 
 error = sum(sum(rhoMeshCST.^2.*errorMat))/sum(sum( rhoMeshCST.^3 ));
 
-disp(error);
-[X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, rhoMeshCST);
-figure;
-mesh(X,Y,Z);
-axis equal
-title('original CST output')
 
-[X, Y, Z] = sph2cart(phiMeshMatlab, thetaMeshMatlab, rhoMeshMatlab);
-
-figure;
-mesh(X,Y,Z);
-axis equal
-title('normalized matlab output')
-
-
-[X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, errorMat);
-
-figure;
-mesh(X,Y,Z);
-axis equal
-title('actual error')
-
-[X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, rhoMeshMatlabStar);
-figure;
-mesh(X,Y,Z);
-axis equal
-title('transformed matlab output')
-
-[X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, rhoMeshMatlabStar);
-index = X>0;
-[up, down, left, right] = findRange(index);
-
-X = X(up:down, left:right);
-Y = Y(up:down, left:right);
-Z = Z(up:down, left:right);
-
-figure;
-mesh(X,Y,Z, ones(size(X))/3);
-axis equal
-hold;
-[X, Y, Z] = sph2cart(phiMeshCST, thetaMeshCST, rhoMeshCST);
-index = X>0;
-[up, down, left, right] = findRange(index);
-
-X = X(up:down, left:right);
-Y = Y(up:down, left:right);
-Z = Z(up:down, left:right);
-mesh(X,Y,Z, ones(size(X))/2);
-axis equal
-
-title('cut compare')
-
-% 
