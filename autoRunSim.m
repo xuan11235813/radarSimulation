@@ -1,3 +1,3 @@
-sim = SimulateModel('siegenDisk.png');
-
+sim = SimulateModel('conductor1.bmp');
+% siegenDisk.png
 sim.startSimulation();

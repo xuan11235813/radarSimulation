@@ -28,6 +28,24 @@ classdef DiskModel <handle
             obj.height = height;
             obj.xOrigin = width/2;
             obj.yOrigin = height/2;
+            obj.conductChannel(1,1) = 0;
+        end
+        
+        function isConductMatrix = checkConductMat(obj, xCoordArray, yCoordArray)
+            %isConductMatrix = zeros(numel(yCoordArray), numel(xCoordArray));
+            xCoord = xCoordArray;
+            yCoord = yCoordArray;
+            statusX = (abs(xCoord) <= obj.edgeSize/2);
+            statusY = (abs(yCoord) <= obj.edgeSize/2);
+            xPixel = floor((xCoord./obj.edgeWidthSize) .* obj.width + obj.xOrigin);
+            yPixel = floor((yCoord./obj.edgeWidthSize) .* obj.width + obj.yOrigin);
+            statusX = statusX .* (xPixel>0).* (xPixel <=obj.width);
+            statusY = statusY .* (yPixel>0).* (yPixel <= obj.height);
+            xPixel = xPixel .* statusX + (1 - statusX);
+            yPixel = yPixel .* statusY + (1 - statusY);
+            isConductMatrix = obj.conductChannel(yPixel,xPixel);
+            isConductMatrix(isConductMatrix <= 120) = 0;
+            isConductMatrix(isConductMatrix >0) = 1;
         end
         
         function isConduct = checkConduct(obj, xCoord, yCoord )

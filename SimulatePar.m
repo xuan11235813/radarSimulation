@@ -45,8 +45,8 @@ classdef SimulatePar < handle
             %obj.exampleWidth = 0.1791;
             %obj.exampleWidth = 0.1791;
             %obj.exampleWidth = 0.02;
-            obj.exampleWidth = 0.135;
-            obj.lineUnitLength = 0.00018;
+            %obj.exampleWidth = 0.135;
+            obj.lineUnitLength = 0.0001;
             obj.lineUnitWidth = obj.lineUnitLength/12;
             if obj.lineUnitWidth <= 2e-7
                 obj.lineUnitWidth = 2e-7;

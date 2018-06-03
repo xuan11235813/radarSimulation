@@ -39,7 +39,28 @@ classdef SimulateModel <handle
             obj.position(:,:,1) = pos1Matrix;
             obj.position(:,:,2) = pos2Matrix;
             obj.isConduct = obj.diskMode.checkConductMat(pos1Array, pos2Array);
-            obj.current = obj.calculateCurrentMat(double(pos1Matrix)).*double(obj.isConduct);
+%             disp('calculate surface current')
+%             disp('current height:')
+%             disp(currentHeight);
+%             step = floor(currentHeight/20);
+%             for i =  1:currentHeight
+%                 if mod(i,step) == 0
+%                     disp(i/currentHeight);
+%                 end
+%                 for j = 1:currentWidth
+%                     obj.position(i,j,1) = obj.parameter.lineUnitLength * ...
+%                         ( j - 0.5 ) - widthLength/2;
+%                     obj.position(i,j,2) = obj.parameter.lineUnitWidth * ...
+%                         ( 0.5 - i ) + heightLength/2;
+%                     pos = obj.position(i,j,:);
+%                     obj.isConduct(i,j) = obj.diskMode.checkConduct(pos(1), pos(2));
+%                     if obj.isConduct(i,j) == 1
+%                         obj.current(i,j) = obj.calculateCurrent(pos(1));
+%                     end
+%                 end
+%             end
+            
+
             disp('Done !')
         end
         
@@ -57,18 +78,7 @@ classdef SimulateModel <handle
             value = Hvt * lineUnitWidth;
         end
         
-        % calculate the surface current matrix form
-        function value = calculateCurrentMat(obj, xPosition)
-            incidentAngle = obj.parameter.incidentAngle;
-            B0 = obj.parameter.B0;
-            k = obj.parameter.k;
-            miu0 = 4 * pi * 10^(-7);
-            lineUnitWidth = obj.parameter.lineUnitWidth;
-            Bv = exp(1j .* xPosition .* sin(incidentAngle).*k).* B0;
-            Bvt = Bv .* cos(incidentAngle);
-            Hvt = Bvt./miu0;
-            value = Hvt .* lineUnitWidth;
-        end
+        function value = 
         
         % start simulation
         function startSimulation(obj)
