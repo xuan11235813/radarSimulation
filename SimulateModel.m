@@ -30,8 +30,13 @@ classdef SimulateModel <handle
             obj.isConduct = zeros(currentHeight, currentWidth);
             obj.position =zeros(currentHeight, currentWidth, 3);
             disp('calculate surface current')
-            
+            disp('current height:')
+            disp(currentHeight);
+            step = floor(currentHeight/20);
             for i =  1:currentHeight
+                if mod(i,step) == 0
+                    disp(i/currentHeight);
+                end
                 for j = 1:currentWidth
                     obj.position(i,j,1) = obj.parameter.lineUnitLength * ...
                         ( j - 0.5 ) - widthLength/2;
@@ -110,6 +115,33 @@ classdef SimulateModel <handle
             save newResult phiMesh thetaMesh rhoMesh currentMatrix
         end
         
+        
+        
+        % simulate one point without parallel method
+        function rPower = simulateOnePoint(obj)
+            k = obj.parameter.k;
+            r = obj.parameter.r;
+            lineUnitLength = obj.parameter.lineUnitLength;
+            currentMatrix = obj.current;
+            pos = obj.position;
+            testTheta = obj.parameter.testTheta;
+            testPhi = obj.parameter.testPhi;
+            
+            theta = testTheta;
+            phi = testPhi;
+            x0 = r * cos(theta)*cos(phi);
+            y0 = r * cos(theta)*sin(phi);
+            z0 = r * sin(theta);
+            [Er, ETheta] = calculateElectricIntensity(...
+                [x0,y0,z0],...
+                currentMatrix, ...
+                k,  ...
+                pos, ...
+                lineUnitLength);
+            r1 = abs(Er + ETheta).^2;
+            % calculate power
+            rPower = sum(r1(:));
+        end
     end
     methods(Static)
     end

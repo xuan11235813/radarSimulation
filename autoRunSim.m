@@ -1,3 +1,3 @@
-sim = SimulateModel('exampleGen.png');
+sim = SimulateModel('siegenDisk.png');
 
 sim.startSimulation();
