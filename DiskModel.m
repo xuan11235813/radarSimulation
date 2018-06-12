@@ -31,6 +31,13 @@ classdef DiskModel <handle
             obj.conductChannel(1,1) = 0;
         end
         
+        function renewDisk(obj, newImage)
+            I = newImage;
+            obj.conductChannel = I(:,:,1);
+            obj.dielectricChannel = I(:,:,2);
+            obj.conductChannel(1,1) = 0;
+        end
+        
         function isConductMatrix = checkConductMat(obj, xCoordArray, yCoordArray)
             %isConductMatrix = zeros(numel(yCoordArray), numel(xCoordArray));
             xCoord = xCoordArray;

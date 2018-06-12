@@ -1,3 +1,13 @@
-sim = SimulateModel('conductor1.bmp');
+sim = SimulateModel('siegenDisk.png');
 % siegenDisk.png
-sim.startSimulation();
+% sim.startSimulation();
+sim.simulateOnePoint();
+sim.simulateOnePoint();
+sim.simulateOnePoint();
+sim.simulateOnePoint();
+sim.simulateOnePoint();
+sim.simulateOnePoint();
+sim.simulateOnePoint();
+sim.simulateOnePoint();
+sim.simulateOnePoint();
+sim.simulateOnePoint();

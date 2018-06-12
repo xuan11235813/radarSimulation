@@ -42,7 +42,27 @@ classdef SimulateModel <handle
             obj.current = obj.calculateCurrentMat(double(pos1Matrix)).*double(obj.isConduct);
             disp('Done !')
         end
-        
+        function renewImage(obj, newImage)
+            obj.parameter = SimulatePar();
+            obj.diskMode.renewDisk(newImage);
+            widthLength = obj.diskMode.edgeWidthSize;
+            heightLength = obj.diskMode.edgeHeightSize;
+            currentHeight = floor(heightLength/obj.parameter.lineUnitWidth);
+            currentWidth = floor(widthLength/obj.parameter.lineUnitLength);
+            obj.current = zeros(currentHeight, currentWidth);
+            obj.isConduct = zeros(currentHeight, currentWidth);
+            obj.position = zeros(currentHeight, currentWidth, 3);
+            
+            pos1Array = ((1:currentWidth) - 0.5) * obj.parameter.lineUnitLength ...
+                - widthLength/2;
+            pos2Array = (0.5 - (1:currentHeight)) * obj.parameter.lineUnitWidth ...
+                + heightLength/2;
+            [pos1Matrix, pos2Matrix] = meshgrid(pos1Array, pos2Array);
+            obj.position(:,:,1) = pos1Matrix;
+            obj.position(:,:,2) = pos2Matrix;
+            obj.isConduct = obj.diskMode.checkConductMat(pos1Array, pos2Array);
+            obj.current = obj.calculateCurrentMat(double(pos1Matrix)).*double(obj.isConduct);
+        end
         
         % calculate the surface current
         function value = calculateCurrent(obj, xPosition)

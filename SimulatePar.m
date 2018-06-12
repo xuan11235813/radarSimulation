@@ -45,8 +45,8 @@ classdef SimulatePar < handle
             %obj.exampleWidth = 0.1791;
             %obj.exampleWidth = 0.1791;
             %obj.exampleWidth = 0.02;
-            %obj.exampleWidth = 0.135;
-            obj.lineUnitLength = 0.0001;
+            obj.exampleWidth = 0.135;
+            obj.lineUnitLength = 0.00012;
             obj.lineUnitWidth = obj.lineUnitLength/12;
             if obj.lineUnitWidth <= 2e-7
                 obj.lineUnitWidth = 2e-7;
@@ -62,8 +62,8 @@ classdef SimulatePar < handle
             
             obj.thetaStep = pi/(2* 35);
             obj.phiStep = pi/(2* 35);
-            obj.testTheta = pi/3;
-            obj.testPhi = pi/3;
+            obj.testTheta = pi/4 + pi/30;
+            obj.testPhi = pi;
         end
     end
     
