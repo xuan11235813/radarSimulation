@@ -55,6 +55,7 @@ classdef SimulatePar < handle
                 disp('inaccurate simulation')
             end
             obj.r = 20;
+            % 300 GHz
             obj.k = 1256.637*5;
             obj.B0 = 1e-9;
             obj.E0 = obj.B0/sqrt( 8.854 * 10^-12 * 4 * pi* 10 ^ -7);
